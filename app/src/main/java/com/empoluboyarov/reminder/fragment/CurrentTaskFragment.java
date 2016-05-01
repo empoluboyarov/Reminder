@@ -17,12 +17,7 @@ import com.empoluboyarov.reminder.model.ModelTask;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CurrentTaskFragment extends Fragment {
-
-    private RecyclerView rvCurrentTasks;
-    private RecyclerView.LayoutManager layoutManager;
-
-    private CurrentTasksAdapter adapter;
+public class CurrentTaskFragment extends TaskFragment {
 
     public CurrentTaskFragment() {
         // Required empty public constructor
@@ -34,30 +29,14 @@ public class CurrentTaskFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_current_task, container, false);
 
-        rvCurrentTasks = (RecyclerView) rootView.findViewById(R.id.rvCurrentTasks);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.rvCurrentTasks);
         layoutManager = new LinearLayoutManager(getActivity());
 
-        rvCurrentTasks.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new CurrentTasksAdapter();
-        rvCurrentTasks.setAdapter(adapter);
+        adapter = new CurrentTasksAdapter(this);
+        recyclerView.setAdapter(adapter);
 
         return rootView;
     }
-
-    public void addTask(ModelTask newTask) {
-        int position = -1;
-
-        for (int i = 0; i < adapter.getItemCount(); i++) {
-            ModelTask task = (ModelTask) adapter.getItem(i);
-            if (newTask.getDate() < task.getDate()) {
-                position = i;
-                break;
-            }
-        }
-        if (position != -1)
-            adapter.addItem(position, newTask);
-        else adapter.addItem(newTask);
-    }
-
 }
