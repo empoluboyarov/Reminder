@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 
 import com.empoluboyarov.reminder.adapter.CurrentTasksAdapter;
+import com.empoluboyarov.reminder.adapter.TaskAdapter;
 import com.empoluboyarov.reminder.model.ModelTask;
 
 /**
@@ -13,7 +14,7 @@ public abstract class TaskFragment extends Fragment {
 
     protected RecyclerView recyclerView;
     protected RecyclerView.LayoutManager layoutManager;
-    protected CurrentTasksAdapter adapter;
+    protected TaskAdapter adapter;
 
     public void addTask(ModelTask newTask) {
         int position = -1;
@@ -29,6 +30,8 @@ public abstract class TaskFragment extends Fragment {
             adapter.addItem(position, newTask);
         else adapter.addItem(newTask);
     }
+
+    public abstract void moveTask(ModelTask task);
 
 
 }

@@ -1,6 +1,7 @@
 package com.empoluboyarov.reminder.fragment;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,21 @@ public class CurrentTaskFragment extends TaskFragment {
         // Required empty public constructor
     }
 
+    OnTaskDoneListener onTaskDoneListener;
+
+    public interface OnTaskDoneListener{
+        void onTaskDone (ModelTask task);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            onTaskDoneListener = (OnTaskDoneListener) activity;
+        } catch (ClassCastException e){
+            throw new ClassCastException(activity.toString() + "must implements OnTaskDoneListener");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,5 +54,10 @@ public class CurrentTaskFragment extends TaskFragment {
         recyclerView.setAdapter(adapter);
 
         return rootView;
+    }
+
+    @Override
+    public void moveTask(ModelTask task){
+        onTaskDoneListener.onTaskDone(task);
     }
 }

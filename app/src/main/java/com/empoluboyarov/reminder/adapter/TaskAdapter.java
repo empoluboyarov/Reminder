@@ -3,6 +3,7 @@ package com.empoluboyarov.reminder.adapter;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.empoluboyarov.reminder.fragment.TaskFragment;
@@ -11,17 +12,21 @@ import com.empoluboyarov.reminder.model.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by Evgeniy on 01.05.2016.
  */
 public abstract class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    List<Item> items;
+    public static final int TYPE_TASK = 0;
+    public static final int TYPE_SEPARATOR = 1;
+
+    List<Item> items = new ArrayList<>();
     TaskFragment taskFragment;
 
     public TaskAdapter(TaskFragment taskFragment) {
         this.taskFragment = taskFragment;
-        items = new ArrayList<>();
     }
 
     public Item getItem(int position) {
@@ -54,11 +59,13 @@ public abstract class TaskAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         protected TextView title;
         protected TextView date;
+        protected CircleImageView priority;
 
-        public TaskViewHolder(View itemView, TextView title, TextView date) {
+        public TaskViewHolder(View itemView, TextView title, TextView date, CircleImageView priority) {
             super(itemView);
             this.title = title;
             this.date = date;
+            this.priority = priority;
         }
     }
 
@@ -66,4 +73,11 @@ public abstract class TaskAdapter extends RecyclerView.Adapter<RecyclerView.View
         return taskFragment;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (getItem(position).isTask()){
+            return TYPE_TASK;
+        } else
+            return TYPE_SEPARATOR;
+    }
 }

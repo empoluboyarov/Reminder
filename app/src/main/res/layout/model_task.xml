@@ -21,14 +21,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="72dp"
         android:layout_marginTop="16dp"
         android:layout_toLeftOf="@id/tvTaskDate"
         android:layout_toRightOf="@id/tvTaskDate"
         android:textColor="@color/primary_text_default_material_light"
         android:textSize="16dp" />
     
-    <android.support.v4.widget.CircleImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/cvTaskPriority"

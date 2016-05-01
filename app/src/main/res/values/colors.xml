@@ -14,4 +14,7 @@
     <color name="priority_normal_selected">#c8e6c9</color>
     <color name="priority_low_selected">#b3e5fc</color>
 
+    <color name="gray_50">#fafafa</color>
+    <color name="gray_200">#eeeeee</color>
+
 </resources>
