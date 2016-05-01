@@ -18,9 +18,9 @@ import com.empoluboyarov.reminder.model.ModelTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CurrentTasksAdapter extends TaskAdapter {
+public class CurrentTaskAdapter extends TaskAdapter {
 
-    public CurrentTasksAdapter(CurrentTaskFragment taskFragment) {
+    public CurrentTaskAdapter(CurrentTaskFragment taskFragment) {
         super(taskFragment);
     }
 

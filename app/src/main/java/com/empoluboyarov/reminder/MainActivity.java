@@ -19,16 +19,18 @@ import com.empoluboyarov.reminder.dialog.AddingTaskDialogFragment;
 import com.empoluboyarov.reminder.fragment.CurrentTaskFragment;
 import com.empoluboyarov.reminder.fragment.DoneTaskFragment;
 import com.empoluboyarov.reminder.fragment.SplashFragment;
+import com.empoluboyarov.reminder.fragment.TaskFragment;
 import com.empoluboyarov.reminder.model.ModelTask;
 
 
-public class MainActivity extends AppCompatActivity implements AddingTaskDialogFragment.AddingTaskListener{
+public class MainActivity extends AppCompatActivity implements AddingTaskDialogFragment.AddingTaskListener,
+    CurrentTaskFragment.OnTaskDoneListener, DoneTaskFragment.OnTaskRestoreListener{
 
     private FragmentManager fragmentManager;
     private PreferenceHelper preferenceHelper;
     private TabAdapter tabAdapter;
-    private CurrentTaskFragment currentTaskFragment;
-    private DoneTaskFragment doneTaskFragment;
+    private TaskFragment currentTaskFragment;
+    private TaskFragment doneTaskFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,5 +134,15 @@ public class MainActivity extends AppCompatActivity implements AddingTaskDialogF
     @Override
     public void onTaskAddingCancel() {
         Toast.makeText(this, "Task adding cancel.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onTaskDone(ModelTask task) {
+        doneTaskFragment.addTask(task);
+    }
+
+    @Override
+    public void onTaskRestore(ModelTask task) {
+        currentTaskFragment.addTask(task);
     }
 }

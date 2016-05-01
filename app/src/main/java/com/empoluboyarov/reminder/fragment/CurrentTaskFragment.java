@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.empoluboyarov.reminder.R;
-import com.empoluboyarov.reminder.adapter.CurrentTasksAdapter;
+import com.empoluboyarov.reminder.adapter.CurrentTaskAdapter;
 import com.empoluboyarov.reminder.model.ModelTask;
 
 
@@ -21,13 +21,12 @@ import com.empoluboyarov.reminder.model.ModelTask;
 public class CurrentTaskFragment extends TaskFragment {
 
     public CurrentTaskFragment() {
-        // Required empty public constructor
     }
 
     OnTaskDoneListener onTaskDoneListener;
 
-    public interface OnTaskDoneListener{
-        void onTaskDone (ModelTask task);
+    public interface OnTaskDoneListener {
+        void onTaskDone(ModelTask task);
     }
 
     @Override
@@ -35,29 +34,24 @@ public class CurrentTaskFragment extends TaskFragment {
         super.onAttach(activity);
         try {
             onTaskDoneListener = (OnTaskDoneListener) activity;
-        } catch (ClassCastException e){
-            throw new ClassCastException(activity.toString() + "must implements OnTaskDoneListener");
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnTaskDoneListener");
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_current_task, container, false);
-
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.rvCurrentTasks);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_current_task, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvCurrentTasks);
         layoutManager = new LinearLayoutManager(getActivity());
-
         recyclerView.setLayoutManager(layoutManager);
-
-        adapter = new CurrentTasksAdapter(this);
+        adapter = new CurrentTaskAdapter(this);
         recyclerView.setAdapter(adapter);
-
-        return rootView;
+        return view;
     }
 
     @Override
-    public void moveTask(ModelTask task){
+    public void moveTask(ModelTask task) {
         onTaskDoneListener.onTaskDone(task);
     }
 }

@@ -3,7 +3,6 @@ package com.empoluboyarov.reminder.fragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 
-import com.empoluboyarov.reminder.adapter.CurrentTasksAdapter;
 import com.empoluboyarov.reminder.adapter.TaskAdapter;
 import com.empoluboyarov.reminder.model.ModelTask;
 
