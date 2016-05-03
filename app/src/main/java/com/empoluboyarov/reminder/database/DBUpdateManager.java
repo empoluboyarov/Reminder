@@ -1,6 +1,7 @@
 package com.empoluboyarov.reminder.database;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.empoluboyarov.reminder.model.ModelTask;
@@ -15,6 +16,7 @@ public class DBUpdateManager {
     DBUpdateManager(SQLiteDatabase database) {
         this.database = database;
     }
+
 
     private void update(String column, long key, String value) {
         ContentValues cv = new ContentValues();
