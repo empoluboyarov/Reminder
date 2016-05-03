@@ -2,6 +2,8 @@ package com.empoluboyarov.reminder.model;
 
 import com.empoluboyarov.reminder.R;
 
+import java.util.Date;
+
 /**
  * Created by Evgeniy on 30.04.2016.
  */
@@ -21,16 +23,19 @@ public class ModelTask implements Item {
     private long date;
     private int priority;
     private int status;
+    private long timeStamp;
 
     public ModelTask() {
         this.status = -1;
+        this.timeStamp = new Date().getTime();
     }
 
-    public ModelTask(String title, long date, int priority, int status) {
+    public ModelTask(String title, long date, int priority, int status, long timeStamp) {
         this.date = date;
         this.title = title;
         this.priority = priority;
         this.status = status;
+        this.timeStamp = timeStamp;
     }
 
     public int getPriorityColor() {
@@ -75,6 +80,14 @@ public class ModelTask implements Item {
 
     public int getPriority() {
         return priority;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public void setPriority(int priority) {
