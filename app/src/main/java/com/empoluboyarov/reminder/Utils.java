@@ -13,12 +13,12 @@ public class Utils {
     }
 
     public static String getTime(long time){
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH.mm");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         return timeFormat.format(time);
     }
 
     public static String getFullDate(long date){
-        SimpleDateFormat fullDateFormat = new SimpleDateFormat("dd.MM.yyyy  HH.mm");
+        SimpleDateFormat fullDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         return fullDateFormat.format(date);
     }
 }

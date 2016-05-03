@@ -58,7 +58,9 @@ public class DoneTaskAdapter extends TaskAdapter {
                 taskViewHolder.date.setText(null);
             }
             itemView.setVisibility(View.VISIBLE);
-            itemView.setBackgroundColor(resources.getColor(R.color.gray_200));
+
+            taskViewHolder.priority.setEnabled(true);
+
             taskViewHolder.title.setTextColor(resources.getColor(R.color.primary_text_disabled_material_light));
             taskViewHolder.date.setTextColor(resources.getColor(R.color.secondary_text_disabled_material_light));
             taskViewHolder.priority.setColorFilter(resources.getColor(task.getPriorityColor()));
@@ -84,9 +86,10 @@ public class DoneTaskAdapter extends TaskAdapter {
                 public void onClick(View v) {
                     task.setStatus(ModelTask.STATUS_CURRENT);
 
+                    taskViewHolder.priority.setEnabled(false);
+
                     getTaskFragment().activity.dbHelper.update().status(task.getTimeStamp(),ModelTask.STATUS_CURRENT);
 
-                    itemView.setBackgroundColor(resources.getColor(R.color.gray_50));
                     taskViewHolder.title.setTextColor(resources.getColor(R.color.primary_text_default_material_light));
                     taskViewHolder.date.setTextColor(resources.getColor(R.color.secondary_text_default_material_light));
                     taskViewHolder.priority.setColorFilter(resources.getColor(task.getPriorityColor()));

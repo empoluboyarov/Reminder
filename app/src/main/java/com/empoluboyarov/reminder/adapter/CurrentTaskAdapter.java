@@ -62,7 +62,8 @@ public class CurrentTaskAdapter extends TaskAdapter {
             }
 
             itemView.setVisibility(View.VISIBLE);
-            itemView.setBackgroundColor(resources.getColor(R.color.gray_50));
+
+            taskViewHolder.priority.setEnabled(true);
 
             taskViewHolder.title.setTextColor(resources.getColor(R.color.primary_text_default_material_light));
             taskViewHolder.date.setTextColor(resources.getColor(R.color.secondary_text_default_material_light));
@@ -89,9 +90,9 @@ public class CurrentTaskAdapter extends TaskAdapter {
                 public void onClick(View v) {
                     task.setStatus(ModelTask.STATUS_DONE);
 
-                    getTaskFragment().activity.dbHelper.update().status(task.getTimeStamp(), ModelTask.STATUS_DONE);
+                    taskViewHolder.priority.setEnabled(false);
 
-                    itemView.setBackgroundColor(resources.getColor(R.color.gray_200));
+                    getTaskFragment().activity.dbHelper.update().status(task.getTimeStamp(), ModelTask.STATUS_DONE);
 
                     taskViewHolder.title.setTextColor(resources.getColor(R.color.primary_text_default_material_light));
                     taskViewHolder.date.setTextColor(resources.getColor(R.color.secondary_text_default_material_light));
