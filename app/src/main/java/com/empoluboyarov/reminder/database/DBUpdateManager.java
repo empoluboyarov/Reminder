@@ -19,13 +19,13 @@ public class DBUpdateManager {
     private void update(String column, long key, String value) {
         ContentValues cv = new ContentValues();
         cv.put(column, value);
-        database.update(DBHelper.TASKS_TABLE, cv, DBHelper.TASK_TIME_STAMP_COLUMN + " - " + key, null);
+        database.update(DBHelper.TASKS_TABLE, cv, DBHelper.TASK_TIME_STAMP_COLUMN + " = " + key, null);
     }
 
     private void update(String column, long key, long value) {
         ContentValues cv = new ContentValues();
         cv.put(column, value);
-        database.update(DBHelper.TASKS_TABLE, cv, DBHelper.TASK_TIME_STAMP_COLUMN + " - " + key, null);
+        database.update(DBHelper.TASKS_TABLE, cv, DBHelper.TASK_TIME_STAMP_COLUMN + " = " + key, null);
     }
 
     public void title(long timeStamp, String title) {

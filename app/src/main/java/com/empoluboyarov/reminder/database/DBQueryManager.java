@@ -19,11 +19,11 @@ public class DBQueryManager {
         this.database = database;
     }
 
-    public List<ModelTask> getTasks(String selection, String[] selecionArgs, String orderBy) {
+    public List<ModelTask> getTasks(String selection, String[] selectionArgs, String orderBy) {
 
         List<ModelTask> tasks = new ArrayList<>();
 
-        Cursor c = database.query(DBHelper.TASKS_TABLE, null, selection, selecionArgs, null, null, orderBy);
+        Cursor c = database.query(DBHelper.TASKS_TABLE, null, selection, selectionArgs, null, null, orderBy);
 
         if (c.moveToFirst()) {
             do {
