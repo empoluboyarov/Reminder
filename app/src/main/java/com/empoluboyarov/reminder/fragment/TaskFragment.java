@@ -113,7 +113,9 @@ public abstract class TaskFragment extends Fragment {
 
     public abstract void moveTask(ModelTask task);
 
-    public abstract void addTaskFromDB();
+    public abstract void addTaskFromDB ();
+
+    public abstract void findTask (String title);
 
 
 }
