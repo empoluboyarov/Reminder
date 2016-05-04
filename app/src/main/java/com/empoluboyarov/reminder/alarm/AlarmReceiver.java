@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.NotificationCompat;
 
 import com.empoluboyarov.reminder.MainActivity;
@@ -39,7 +40,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         builder.setContentTitle("Reminder");
         builder.setSmallIcon(R.drawable.checkbox_multiple_marked_circle_outline);
         builder.setContentText(title);
-        builder.setColor(color);
+        builder.setColor(context.getResources().getColor(color));
 
         builder.setDefaults(Notification.DEFAULT_ALL);
         builder.setContentIntent(pendingIntent);
