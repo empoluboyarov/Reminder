@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.empoluboyarov.reminder.adapter.TabAdapter;
+import com.empoluboyarov.reminder.alarm.AlarmHelper;
 import com.empoluboyarov.reminder.database.DBHelper;
 import com.empoluboyarov.reminder.dialog.AddingTaskDialogFragment;
 import com.empoluboyarov.reminder.fragment.CurrentTaskFragment;
@@ -44,12 +45,27 @@ public class MainActivity extends AppCompatActivity implements AddingTaskDialogF
         PreferenceHelper.getInstance().init(getApplicationContext());
         preferenceHelper = PreferenceHelper.getInstance();
 
+        AlarmHelper.getInstance().init(getApplicationContext());
+
+
         dbHelper = new DBHelper(getApplicationContext());
 
         fragmentManager = getSupportFragmentManager();
         runSplash();
         setUi();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MyApplication.activityPaused();
     }
 
     @Override

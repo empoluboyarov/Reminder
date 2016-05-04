@@ -21,6 +21,7 @@ import android.widget.TimePicker;
 
 import com.empoluboyarov.reminder.R;
 import com.empoluboyarov.reminder.Utils;
+import com.empoluboyarov.reminder.alarm.AlarmHelper;
 import com.empoluboyarov.reminder.model.ModelTask;
 
 import java.util.Calendar;
@@ -147,9 +148,14 @@ public class AddingTaskDialogFragment extends DialogFragment {
         builder.setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 task.setTitle(etTitle.getText().toString());
+                task.setStatus(ModelTask.STATUS_CURRENT);
+
                 if(etDate.length() != 0 || etTime.length() != 0){
                     task.setDate(calendar.getTimeInMillis());
+                    AlarmHelper alarmHelper = AlarmHelper.getInstance();
+                    alarmHelper.setAlarm(task);
                 }
                 task.setStatus(ModelTask.STATUS_CURRENT);
                 addingTaskListener.onTaskAdded(task);

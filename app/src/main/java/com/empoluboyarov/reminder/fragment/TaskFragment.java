@@ -12,6 +12,7 @@ import android.view.View;
 import com.empoluboyarov.reminder.MainActivity;
 import com.empoluboyarov.reminder.R;
 import com.empoluboyarov.reminder.adapter.TaskAdapter;
+import com.empoluboyarov.reminder.alarm.AlarmHelper;
 import com.empoluboyarov.reminder.model.Item;
 import com.empoluboyarov.reminder.model.ModelTask;
 
@@ -25,6 +26,7 @@ public abstract class TaskFragment extends Fragment {
     protected TaskAdapter adapter;
 
     public MainActivity activity;
+    public AlarmHelper alarmHelper;
 
 
     @Override
@@ -33,7 +35,7 @@ public abstract class TaskFragment extends Fragment {
 
         if (getActivity() != null)
             activity = (MainActivity) getActivity();
-
+        alarmHelper = AlarmHelper.getInstance();
         addTaskFromDB();
     }
 
@@ -91,6 +93,7 @@ public abstract class TaskFragment extends Fragment {
                         @Override
                         public void onViewDetachedFromWindow(View v) {
                             if (isRemoved[0]) {
+                                alarmHelper.removeAlarm(timeStamp);
                                 activity.dbHelper.removeTask(timeStamp);
                             }
                         }
