@@ -82,6 +82,13 @@ public class CurrentTaskAdapter extends TaskAdapter {
             taskViewHolder.priority.setColorFilter(resources.getColor(task.getPriorityColor()));
             taskViewHolder.priority.setImageResource(R.drawable.checkbox_blank_circle);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getTaskFragment().showTaskEditDialog(task);
+                }
+            });
+
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -109,13 +116,6 @@ public class CurrentTaskAdapter extends TaskAdapter {
                     taskViewHolder.title.setTextColor(resources.getColor(R.color.primary_text_default_material_light));
                     taskViewHolder.date.setTextColor(resources.getColor(R.color.secondary_text_default_material_light));
                     taskViewHolder.priority.setColorFilter(resources.getColor(task.getPriorityColor()));
-
-                    itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            getTaskFragment().showTaskEditDialog(task);
-                        }
-                    });
 
                     ObjectAnimator flipIn = ObjectAnimator.ofFloat(taskViewHolder.priority, "rotationY", -180f, 0f);
                     flipIn.addListener(new Animator.AnimatorListener() {
