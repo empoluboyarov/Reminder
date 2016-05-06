@@ -15,7 +15,10 @@ import com.empoluboyarov.reminder.R;
 import com.empoluboyarov.reminder.Utils;
 import com.empoluboyarov.reminder.fragment.CurrentTaskFragment;
 import com.empoluboyarov.reminder.model.Item;
+import com.empoluboyarov.reminder.model.ModelSeparator;
 import com.empoluboyarov.reminder.model.ModelTask;
+
+import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,7 +40,9 @@ public class CurrentTaskAdapter extends TaskAdapter {
                 return new TaskViewHolder(view, title, date, priority);
 
             case TYPE_SEPARATOR:
-                return null;
+                View separator = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.separator_model, viewGroup, false);
+                TextView type = (TextView) separator.findViewById(R.id.tvSeparatorName);
+                return new SeparatorViewHolder(separator, type);
             default:
                 return null;
         }
@@ -46,19 +51,25 @@ public class CurrentTaskAdapter extends TaskAdapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         final Item item = items.get(position);
+        final Resources resources = viewHolder.itemView.getResources();
         if (item.isTask()) {
             viewHolder.itemView.setEnabled(true);
             final ModelTask task = (ModelTask) item;
             final TaskViewHolder taskViewHolder = (TaskViewHolder) viewHolder;
 
             final View itemView = taskViewHolder.itemView;
-            final Resources resources = itemView.getResources();
 
             taskViewHolder.title.setText(task.getTitle());
             if (task.getDate() != 0) {
                 taskViewHolder.date.setText(Utils.getFullDate(task.getDate()));
             } else {
                 taskViewHolder.date.setText(null);
+            }
+
+            if (task.getDate() != 0 && task.getDate() < Calendar.getInstance().getTimeInMillis()) {
+                itemView.setBackgroundColor(resources.getColor(R.color.gray_200));
+            } else {
+                itemView.setBackgroundColor(resources.getColor(R.color.gray_50));
             }
 
             itemView.setVisibility(View.VISIBLE);
@@ -153,6 +164,10 @@ public class CurrentTaskAdapter extends TaskAdapter {
                     flipIn.start();
                 }
             });
+        } else {
+            ModelSeparator separator = (ModelSeparator) item;
+            SeparatorViewHolder separatorViewHolder = (SeparatorViewHolder)viewHolder;
+            separatorViewHolder.type.setText(resources.getString(separator.getType()));
         }
     }
 }
