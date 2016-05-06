@@ -1,6 +1,7 @@
 package com.empoluboyarov.reminder.fragment;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.empoluboyarov.reminder.MainActivity;
 import com.empoluboyarov.reminder.R;
 import com.empoluboyarov.reminder.adapter.TaskAdapter;
 import com.empoluboyarov.reminder.alarm.AlarmHelper;
+import com.empoluboyarov.reminder.dialog.EditTaskDialogFragment;
 import com.empoluboyarov.reminder.model.Item;
 import com.empoluboyarov.reminder.model.ModelTask;
 
@@ -40,6 +42,11 @@ public abstract class TaskFragment extends Fragment {
     }
 
     public abstract void addTask(ModelTask newTask, boolean saveToDB);
+
+
+    public void updateTask(ModelTask task){
+        adapter.updateTask(task);
+    }
 
     public void removeTaskDialog(final int location) {
         Item item = adapter.getItem(location);
@@ -98,7 +105,14 @@ public abstract class TaskFragment extends Fragment {
         dialogBuilder.show();
     }
 
+    public void showTaskEditDialog(ModelTask task){
+        DialogFragment editingTaskDialog = EditTaskDialogFragment.newInstance(task);
+        editingTaskDialog.show(getActivity().getFragmentManager(), "EditTaskDialogFragment");
+    }
+
     public abstract void moveTask(ModelTask task);
+
+
 
     public abstract void addTaskFromDB ();
 

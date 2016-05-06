@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.empoluboyarov.reminder.fragment.TaskFragment;
 import com.empoluboyarov.reminder.model.Item;
 import com.empoluboyarov.reminder.model.ModelSeparator;
+import com.empoluboyarov.reminder.model.ModelTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,18 @@ public abstract class TaskAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void addItem(int location, Item item) {
         items.add(location, item);
         notifyItemInserted(location);
+    }
+
+    public void updateTask(ModelTask newTask){
+        for (int i = 0; i < getItemCount(); i++) {
+            if (getItem(i).isTask()){
+                ModelTask task  = (ModelTask) getItem(i);
+                if (newTask.getTimeStamp() == task.getTimeStamp()){
+                    remoteItem(i);
+                    getTaskFragment().addTask(newTask, false);
+                }
+            }
+        }
     }
 
     public void remoteItem(int location) {

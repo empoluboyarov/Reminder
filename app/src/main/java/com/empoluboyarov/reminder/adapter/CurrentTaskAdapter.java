@@ -109,6 +109,13 @@ public class CurrentTaskAdapter extends TaskAdapter {
                     taskViewHolder.date.setTextColor(resources.getColor(R.color.secondary_text_default_material_light));
                     taskViewHolder.priority.setColorFilter(resources.getColor(task.getPriorityColor()));
 
+                    itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+getTaskFragment().showTaskEditDialog(task);
+                        }
+                    });
+
                     ObjectAnimator flipIn = ObjectAnimator.ofFloat(taskViewHolder.priority, "rotationY", -180f, 0f);
                     flipIn.addListener(new Animator.AnimatorListener() {
                         @Override

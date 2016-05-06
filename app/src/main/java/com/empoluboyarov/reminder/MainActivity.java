@@ -19,6 +19,7 @@ import com.empoluboyarov.reminder.adapter.TabAdapter;
 import com.empoluboyarov.reminder.alarm.AlarmHelper;
 import com.empoluboyarov.reminder.database.DBHelper;
 import com.empoluboyarov.reminder.dialog.AddingTaskDialogFragment;
+import com.empoluboyarov.reminder.dialog.EditTaskDialogFragment;
 import com.empoluboyarov.reminder.fragment.CurrentTaskFragment;
 import com.empoluboyarov.reminder.fragment.DoneTaskFragment;
 import com.empoluboyarov.reminder.fragment.SplashFragment;
@@ -27,7 +28,8 @@ import com.empoluboyarov.reminder.model.ModelTask;
 
 
 public class MainActivity extends AppCompatActivity implements AddingTaskDialogFragment.AddingTaskListener,
-    CurrentTaskFragment.OnTaskDoneListener, DoneTaskFragment.OnTaskRestoreListener{
+    CurrentTaskFragment.OnTaskDoneListener, DoneTaskFragment.OnTaskRestoreListener,
+        EditTaskDialogFragment.EditTaskListener{
 
     private FragmentManager fragmentManager;
     private PreferenceHelper preferenceHelper;
@@ -180,5 +182,11 @@ public class MainActivity extends AppCompatActivity implements AddingTaskDialogF
     @Override
     public void onTaskRestore(ModelTask task) {
         currentTaskFragment.addTask(task, false);
+    }
+
+    @Override
+    public void onTaskEdited(ModelTask updateTask) {
+        currentTaskFragment.updateTask(updateTask);
+        dbHelper.update().task(updateTask);
     }
 }
