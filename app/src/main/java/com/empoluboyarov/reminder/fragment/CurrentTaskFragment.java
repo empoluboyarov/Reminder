@@ -62,16 +62,20 @@ public class CurrentTaskFragment extends TaskFragment {
         ModelSeparator separator = null;
 
         for (int i = 0; i < adapter.getItemCount(); i++) {
-            ModelTask task = (ModelTask) adapter.getItem(i);
-            if (newTask.getDate() < task.getDate()) {
-                position = i;
-                break;
+
+            if (adapter.getItem(i).isTask()) {
+                ModelTask task = (ModelTask) adapter.getItem(i);
+                if (newTask.getDate() < task.getDate()) {
+                    position = i;
+                    break;
+                }
             }
         }
 
         if (newTask.getDate() != 0) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(newTask.getDate());
+
             if (calendar.get(Calendar.DAY_OF_YEAR) < Calendar.getInstance().get(Calendar.DAY_OF_YEAR)) {
                 newTask.setDateStatus(ModelSeparator.TYPE_OVERDUE);
                 if (!adapter.containsSeparatorOverdue) {

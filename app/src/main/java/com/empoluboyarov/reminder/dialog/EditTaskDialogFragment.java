@@ -33,8 +33,8 @@ public class EditTaskDialogFragment extends DialogFragment {
 
     public static EditTaskDialogFragment newInstance(ModelTask task) {
         EditTaskDialogFragment editTaskDialogFragment = new EditTaskDialogFragment();
-        Bundle args = new Bundle();
 
+        Bundle args = new Bundle();
         args.putString("title", task.getTitle());
         args.putLong("date", task.getDate());
         args.putInt("priority", task.getPriority());
@@ -62,6 +62,7 @@ public class EditTaskDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         Bundle args = getArguments();
         String title = args.getString("title");
         long date = args.getLong("date", 0);

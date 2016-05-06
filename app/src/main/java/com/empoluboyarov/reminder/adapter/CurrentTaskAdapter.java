@@ -40,7 +40,8 @@ public class CurrentTaskAdapter extends TaskAdapter {
                 return new TaskViewHolder(view, title, date, priority);
 
             case TYPE_SEPARATOR:
-                View separator = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.separator_model, viewGroup, false);
+                View separator = LayoutInflater.from(viewGroup.getContext())
+                        .inflate(R.layout.separator_model, viewGroup, false);
                 TextView type = (TextView) separator.findViewById(R.id.tvSeparatorName);
                 return new SeparatorViewHolder(separator, type);
             default:
@@ -112,7 +113,7 @@ public class CurrentTaskAdapter extends TaskAdapter {
                     itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-getTaskFragment().showTaskEditDialog(task);
+                            getTaskFragment().showTaskEditDialog(task);
                         }
                     });
 
@@ -173,7 +174,7 @@ getTaskFragment().showTaskEditDialog(task);
             });
         } else {
             ModelSeparator separator = (ModelSeparator) item;
-            SeparatorViewHolder separatorViewHolder = (SeparatorViewHolder)viewHolder;
+            SeparatorViewHolder separatorViewHolder = (SeparatorViewHolder) viewHolder;
             separatorViewHolder.type.setText(resources.getString(separator.getType()));
         }
     }

@@ -44,7 +44,7 @@ public abstract class TaskFragment extends Fragment {
     public abstract void addTask(ModelTask newTask, boolean saveToDB);
 
 
-    public void updateTask(ModelTask task){
+    public void updateTask(ModelTask task) {
         adapter.updateTask(task);
     }
 
@@ -105,7 +105,7 @@ public abstract class TaskFragment extends Fragment {
         dialogBuilder.show();
     }
 
-    public void showTaskEditDialog(ModelTask task){
+    public void showTaskEditDialog(ModelTask task) {
         DialogFragment editingTaskDialog = EditTaskDialogFragment.newInstance(task);
         editingTaskDialog.show(getActivity().getFragmentManager(), "EditTaskDialogFragment");
     }
@@ -113,10 +113,9 @@ public abstract class TaskFragment extends Fragment {
     public abstract void moveTask(ModelTask task);
 
 
+    public abstract void addTaskFromDB();
 
-    public abstract void addTaskFromDB ();
-
-    public abstract void findTask (String title);
+    public abstract void findTask(String title);
 
 
 }
